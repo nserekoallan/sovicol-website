@@ -19,54 +19,15 @@ export const SITE_CONFIG = {
   },
 };
 
-/** Main navigation items */
+/** Main navigation items - Only functional pages */
 export const NAV_ITEMS: NavItem[] = [
   {
     label: 'Products',
     href: '/products',
-    children: [
-      {
-        label: 'Basecoats',
-        href: '/products/basecoats',
-        description: 'High-quality base paint colors',
-      },
-      {
-        label: 'Clearcoats',
-        href: '/products/clearcoats',
-        description: 'Protective clear finishes',
-      },
-      {
-        label: 'Primers',
-        href: '/products/primers',
-        description: 'Surface preparation primers',
-      },
-      {
-        label: 'Specialty',
-        href: '/products/specialty',
-        description: 'Special effect paints',
-      },
-    ],
   },
   {
     label: 'Colors',
     href: '/colors',
-    children: [
-      {
-        label: 'Browse All Colors',
-        href: '/colors',
-        description: 'Explore our full color catalog',
-      },
-      {
-        label: 'Collections',
-        href: '/colors/collections',
-        description: 'Curated color collections',
-      },
-      {
-        label: 'Popular Colors',
-        href: '/colors?filter=popular',
-        description: 'Best-selling paint colors',
-      },
-    ],
   },
   {
     label: 'Simulator',
@@ -75,65 +36,30 @@ export const NAV_ITEMS: NavItem[] = [
     description: 'Try colors on a 3D car',
   },
   {
-    label: 'Business',
-    href: '/business',
-    children: [
-      {
-        label: 'For Auto Shops',
-        href: '/business/auto-shops',
-        description: 'Professional solutions',
-      },
-      {
-        label: 'Become a Dealer',
-        href: '/business/dealers',
-        description: 'Partnership opportunities',
-      },
-      {
-        label: 'Find a Dealer',
-        href: '/locations',
-        description: 'Locate authorized dealers',
-      },
-    ],
+    label: 'Find Dealers',
+    href: '/locations',
   },
   {
-    label: 'Resources',
-    href: '/resources',
-    children: [
-      {
-        label: 'Blog',
-        href: '/resources/blog',
-        description: 'Tips, guides, and news',
-      },
-      {
-        label: 'How-To Guides',
-        href: '/resources/guides',
-        description: 'Step-by-step tutorials',
-      },
-    ],
+    label: 'About',
+    href: '/about',
   },
 ];
 
 /** Footer navigation */
 export const FOOTER_NAV = {
   products: [
-    { label: 'Basecoats', href: '/products/basecoats' },
-    { label: 'Clearcoats', href: '/products/clearcoats' },
-    { label: 'Primers', href: '/products/primers' },
-    { label: 'Specialty Paints', href: '/products/specialty' },
-    { label: 'Accessories', href: '/products/accessories' },
+    { label: 'All Products', href: '/products' },
+    { label: 'Colors', href: '/colors' },
+    { label: '3D Simulator', href: '/simulator' },
   ],
   company: [
     { label: 'About Us', href: '/about' },
-    { label: 'Our Story', href: '/about#story' },
-    { label: 'Quality', href: '/about#quality' },
-    { label: 'Careers', href: '/about#careers' },
+    { label: 'Find Dealers', href: '/locations' },
     { label: 'Contact', href: '/contact' },
   ],
   support: [
-    { label: 'Find a Dealer', href: '/locations' },
-    { label: 'Technical Support', href: '/contact?type=support' },
-    { label: 'FAQs', href: '/resources/faqs' },
     { label: 'Request a Quote', href: '/quote' },
+    { label: 'Contact Us', href: '/contact' },
   ],
   legal: [
     { label: 'Privacy Policy', href: '/legal/privacy' },
@@ -153,21 +79,9 @@ export const CAMERA_PRESETS = {
 /** Available car models in simulator */
 export const CAR_MODELS = [
   {
-    id: 'sedan',
-    name: 'Sedan',
-    description: 'Classic sedan body style',
-    modelPath: '/models/car-sedan.glb',
-  },
-  {
-    id: 'suv',
-    name: 'SUV',
-    description: 'Sport utility vehicle',
-    modelPath: '/models/car-suv.glb',
-  },
-  {
     id: 'sports',
     name: 'Sports Car',
     description: 'High-performance sports car',
-    modelPath: '/models/car-sports.glb',
+    modelPath: '/models/ferrari.glb',
   },
 ] as const;
