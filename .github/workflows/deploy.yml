@@ -54,7 +54,7 @@ jobs:
             if [ $? -eq 0 ]; then
               pm2 restart sovicol
             else
-              pm2 start npm --name "sovicol" -- start
+              pm2 start npm --name "sovicol" --cwd /var/www/sovicol-website -- start
             fi
 
             # Save PM2 process list
