@@ -1,0 +1,63 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+      - name: Deploy to server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/sovicol-website
+
+            # Pull latest code
+            if [ -d ".git" ]; then
+              git fetch origin master
+              git reset --hard origin/master
+            else
+              git clone https://github.com/nserekoallan/sovicol-website.git .
+            fi
+
+            # Install dependencies
+            npm ci --production=false
+
+            # Build the application
+            npm run build
+
+            # Restart the application with PM2
+            pm2 describe sovicol > /dev/null 2>&1
+            if [ $? -eq 0 ]; then
+              pm2 restart sovicol
+            else
+              pm2 start npm --name "sovicol" -- start
+            fi
+
+            # Save PM2 process list
+            pm2 save
+
+            echo "Deployment completed successfully!"
