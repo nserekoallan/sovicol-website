@@ -116,17 +116,6 @@ export function Footer() {
           <p className="text-sm text-primary-foreground/60">
             &copy; {currentYear} Sovicol. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            {FOOTER_NAV.legal.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm text-primary-foreground/60 hover:text-accent transition-colors"
-              >
-                {item.label}
-              </Link>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

@@ -6,7 +6,7 @@ export const SITE_CONFIG = {
   description:
     'Premium automotive paint solutions. Transform your vehicle with our professional-grade car paints, featuring advanced color simulation technology.',
   url: 'https://sovicol.com',
-  ogImage: '/images/og-image.png',
+  ogImage: '/images/logo/sovicol.png',
   links: {
     whatsapp: 'https://wa.me/256708087784',
     email: 'info@sovicol.com',
@@ -60,10 +60,6 @@ export const FOOTER_NAV = {
   support: [
     { label: 'Request a Quote', href: '/quote' },
     { label: 'Contact Us', href: '/contact' },
-  ],
-  legal: [
-    { label: 'Privacy Policy', href: '/legal/privacy' },
-    { label: 'Terms of Service', href: '/legal/terms' },
   ],
 };
 
