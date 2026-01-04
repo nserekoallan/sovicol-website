@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
+import { Menu, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Sheet,
@@ -18,9 +17,9 @@ import { cn } from '@/lib/utils';
 
 /**
  * Main site header with navigation
+ * Simplified for functional pages only
  */
 export function Header() {
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
@@ -41,12 +40,7 @@ export function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center gap-1">
           {NAV_ITEMS.map((item) => (
-            <div
-              key={item.label}
-              className="relative"
-              onMouseEnter={() => setActiveDropdown(item.label)}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
+            <div key={item.label}>
               {item.featured ? (
                 <Link href={item.href}>
                   <Button
@@ -59,57 +53,13 @@ export function Header() {
                   </Button>
                 </Link>
               ) : (
-                <button
-                  className={cn(
-                    'flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors hover:text-primary',
-                    activeDropdown === item.label
-                      ? 'text-primary'
-                      : 'text-muted-foreground'
-                  )}
+                <Link
+                  href={item.href}
+                  className="flex items-center px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
                 >
                   {item.label}
-                  {item.children && (
-                    <ChevronDown
-                      className={cn(
-                        'h-4 w-4 transition-transform',
-                        activeDropdown === item.label && 'rotate-180'
-                      )}
-                    />
-                  )}
-                </button>
+                </Link>
               )}
-
-              {/* Dropdown */}
-              <AnimatePresence>
-                {item.children && activeDropdown === item.label && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute left-0 top-full pt-2"
-                  >
-                    <div className="min-w-[220px] rounded-lg border bg-popover p-2 shadow-lg">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className="block rounded-md px-3 py-2 hover:bg-muted transition-colors"
-                        >
-                          <div className="font-medium text-sm">
-                            {child.label}
-                          </div>
-                          {child.description && (
-                            <div className="text-xs text-muted-foreground mt-0.5">
-                              {child.description}
-                            </div>
-                          )}
-                        </Link>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
           ))}
         </nav>
@@ -148,33 +98,18 @@ export function Header() {
             </SheetHeader>
             <nav className="mt-8 flex flex-col gap-4">
               {NAV_ITEMS.map((item) => (
-                <div key={item.label}>
-                  <Link
-                    href={item.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={cn(
-                      'block py-2 text-lg font-medium',
-                      item.featured && 'text-accent'
-                    )}
-                  >
-                    {item.featured && <Sparkles className="inline h-4 w-4 mr-2" />}
-                    {item.label}
-                  </Link>
-                  {item.children && (
-                    <div className="ml-4 mt-2 flex flex-col gap-2">
-                      {item.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          onClick={() => setMobileOpen(false)}
-                          className="text-sm text-muted-foreground hover:text-primary"
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={cn(
+                    'block py-2 text-lg font-medium transition-colors hover:text-primary',
+                    item.featured && 'text-accent'
                   )}
-                </div>
+                >
+                  {item.featured && <Sparkles className="inline h-4 w-4 mr-2" />}
+                  {item.label}
+                </Link>
               ))}
               <div className="pt-4 flex flex-col gap-3">
                 <Link href="/contact" onClick={() => setMobileOpen(false)}>
