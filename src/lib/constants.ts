@@ -8,9 +8,9 @@ export const SITE_CONFIG = {
   url: 'https://sovicol.com',
   ogImage: '/images/og-image.png',
   links: {
-    whatsapp: 'https://wa.me/256700000000', // Update with actual number
+    whatsapp: 'https://wa.me/256708087784',
     email: 'info@sovicol.com',
-    phone: '+256 700 000 000', // Update with actual number
+    phone: '+256 708 087 784',
   },
   social: {
     twitter: '@sovicol',
